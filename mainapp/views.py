@@ -1,4 +1,6 @@
 import json
+from ast import List
+import string
 
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404
@@ -8,6 +10,14 @@ from django.contrib.auth.decorators import login_required
 from .models import User, Profile
 from .forms import LoginForm, SignupForm
 from django.views.decorators.csrf import csrf_exempt
+
+from django.http import HttpResponse, JsonResponse
+from django.template import loader
+from mainapp.models import User, Item, QandA
+from django.core.mail import send_mail
+
+from django.contrib import messages
+
 
 appname = "Robin's Nest - Mainapp App"
 
@@ -182,3 +192,39 @@ def messages_view(request):
         'page': 'messages',
         'vue_data': vue_data,
     })
+
+
+# update email
+
+@csrf_exempt
+def update_user_email(request, username):
+    if request.method == 'PUT':
+        data: any = json.loads(request.body)
+        user_profile: User = get_object_or_404(User, name=username)
+        user_profile.email: string = data['email']
+        user_profile.save()
+        return JsonResponse(user_profile.to_dict())
+
+# update DOB
+
+@csrf_exempt
+def update_user_DOB(request, username):
+    if request.method == 'PUT':
+        data: any = json.loads(request.body)
+        user_profile: User = get_object_or_404(User, name=username)
+        user_profile.dob: any = data['dob']
+        user_profile.save()
+        return JsonResponse(user_profile.to_dict())
+
+# update profile pic
+
+@csrf_exempt
+def update_user_profile_pic(request):
+    if request.method == 'PUT':
+        data: any = json.loads(request.body)
+        user_profile: User = User.objects.get(
+            id = data['id']
+        )
+        user_profile.profile_pic: any = data['profile_pic']
+        user_profile.save()
+        return JsonResponse(user_profile.to_dict())

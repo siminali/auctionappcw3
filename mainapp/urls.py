@@ -28,4 +28,13 @@ urlpatterns = [
     path('api/messages/', api.messages_api, name='messages api'),
     # Ajax: delete a message
     path('api/messages/<int:message_id>/', api.message_api, name='message api'),
+
+
+
+    #path('api/show', views.show_items),
+    path('api/User/<slug:username>', views.update_user_detail, name = "user"),
+
+     path('api/User/<slug:username>', views.get_user_deets, name = "user"),
+
+
 ]

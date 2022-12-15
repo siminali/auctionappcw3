@@ -13,6 +13,9 @@ class QandA(models.Model):
     item_id = models.IntegerField()
     question = models.CharField(max_length=200)
     answer = models.CharField(max_length=200)
+
+    def __repr__(self):
+        return 'Image(%s, %s)' % (self.profile_pic)
     
     def to_dict(self):
         return{
@@ -36,6 +39,12 @@ class Item(models.Model):
     owner_name = models.TextField(blank=True)
     owner = models.ForeignKey("User", related_name='owns', on_delete=models.CASCADE, null=True)
     question = models.ForeignKey("QandA", related_name='belongs_to', on_delete=models.CASCADE, null=True)
+
+    class Meta:
+        ordering = ['title']
+
+    def __str__(self):
+        return self.title
 
     def to_dict(self):
         return{

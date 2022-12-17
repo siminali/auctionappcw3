@@ -17,6 +17,7 @@ from mainapp.models import User, Item, QandA
 from django.core.mail import send_mail
 
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 
 appname = "Robin's Nest - Mainapp App"
@@ -67,7 +68,8 @@ def login_view(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None:
                 auth.login(request, user)
-                return redirect('http://localhost:5173/')
+                # return redirect('http://localhost:5173/')
+                return HttpResponseRedirect('http://localhost:5173/')
 
             # failed authentication
             return render(request, 'error.html', {

@@ -18,7 +18,7 @@
               <ul>
               
               <li v-for="User in Users" class="text-left font-weight-light text-primary"> 
-               {{Users}}
+               {{User.email}}
                </li>
                </ul>
                <button class="btn btn-success d-block" @click="fetchUser">Fetch User</button>
@@ -85,7 +85,7 @@ export default defineComponent({
 
       async fetchUser(){
           //Perform an Ajax Request to fetch the list of movies
-          var url = `http://localhost:8000/api/User/email/${this.$route.params.username}`;
+          var url = `http://localhost:8000/api/User/${this.$route.params.username}`;
         //   let response = await fetch(`http://localhost:8000/api/User/${this.$route.params.username}`)
         //   let data = await response.json()
         //   this.Users = data.Users

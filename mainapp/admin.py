@@ -3,7 +3,8 @@ from django.contrib.auth.admin import UserAdmin
 from .models import User, Profile, Message, QandA, Item
 
 
-admin.site.register(User, UserAdmin)
+
+admin.site.register(User)
 admin.site.register(Item)
 admin.site.register(QandA)
 

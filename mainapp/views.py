@@ -231,25 +231,25 @@ def update_user_profile_pic(request):
 
 
 
-def user_api(request: HttpRequest) -> HttpResponse:
+def user_api(request):
 
     """ GET and POST methods when spcific movie object is not invloved, general methods """
 
     if request.method == 'GET':
         return JsonResponse({
             
-                'movies': [
+                'users': [
                     User.to_dict()
-                    for user in User.objects.all()
+                    for User in User.objects.all()
                 ]
              
          })
 
-def user_detail(request: HttpRequest, user_id: int) -> HttpResponse:
+def user_detail(request, username):
     """ Methods for different request types relating to a specific movie object 
     identified through id  """
 
-    user = get_object_or_404(User, id=user_id)
+    user = get_object_or_404(User, username)
 
     if (request.method == 'GET'):
         return JsonResponse(user.to_dict())

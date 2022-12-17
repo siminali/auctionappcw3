@@ -44,6 +44,8 @@
 import { defineComponent, reactive, ref, toRefs } from "vue";
 
 export default defineComponent({
+    name: 'profilePage',
+    
     data(){
         return{
             email: undefined,
@@ -63,8 +65,8 @@ export default defineComponent({
     },
     methods:{
         uploadImage(e){
-            const [image]: any = e.target.files;
-            const reader: any = new FileReader();
+            const [image]  = e.target.files;
+            const reader = new FileReader();
             reader.readAsDataURL(image);
             reader.onLoad = e => {
                 this.previewImage = e.target.result;
@@ -81,9 +83,9 @@ export default defineComponent({
         
         },
 
-        async updateEmail(email: String){
-            var url: string = `http://localhost:8000/api/User/email/${this.$route.params.username}`;
-            const requestOptions: any = {
+        async updateEmail(email){
+            var url = `http://localhost:8000/api/User/email/${this.$route.params.username}`;
+            const requestOptions = {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json '},
                 body: JSON.stringify({
@@ -95,15 +97,15 @@ export default defineComponent({
 
             };
             console.log(requestOptions)
-            let response: Response = await fetch(url, requestOptions);
+            let response = await fetch(url, requestOptions);
             this.profile.email = email
-            let data: JSON = await response.json();
+            let data = await response.json();
             return (data)
 
         },
         async updateDob(dob: String){
-            var url: String = `http://localhost:8000/api/User/dob/${this.$route.params.username}`;
-            const requestOptions: any = {
+            var url = `http://localhost:8000/api/User/dob/${this.$route.params.username}`;
+            const requestOptions = {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json '},
                 body: JSON.stringify({ dob: dob }),
@@ -113,9 +115,9 @@ export default defineComponent({
 
             };
             console.log(requestOptions)
-            let response: Response = await fetch(url, requestOptions);
+            let response = await fetch(url, requestOptions);
             this.profile.dob = dob
-            let data: JSON = await response.json();
+            let data = await response.json();
             return (data)
         },
         // async searchUser(){

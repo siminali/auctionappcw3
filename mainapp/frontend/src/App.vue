@@ -21,7 +21,7 @@
                {{Users}}
                </li>
                </ul>
-               <button class="btn btn-success d-block" @click="fetchUser">Fetch Movies</button>
+               <button class="btn btn-success d-block" @click="fetchUser">Fetch User</button>
               </div>
                </div>
 
@@ -88,7 +88,7 @@ export default defineComponent({
 
       async fetchUser(){
           //Perform an Ajax Request to fetch the list of movies
-          let response = await fetch("http://localhost:8000/api/Users/")
+          let response = await fetch(`http://localhost:8000/api/User/${this.$route.params.username}`)
           let data = await response.json()
           this.Users = data.Users
       

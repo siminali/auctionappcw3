@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
+import defineComponent from './components/Profile.vue'
 
 // createApp(App).mount('#app')
 
@@ -10,6 +11,7 @@ import App from './App.vue'
 // These can be imported from other files
 const Home = { template: '<div>Home</div>' }
 const About = { template: '<div>About</div>' }
+const Profile = { template: '<div>Profile</div>' }
 
 // 2. Define some routes
 // Each route should map to a component.
@@ -17,6 +19,7 @@ const About = { template: '<div>About</div>' }
 const routes = [
   { path: '/', component: Home },
   { path: '/about', component: About },
+  { path: '/profile', component: Profile },
 ]
 
 // 3. Create the router instance and pass the `routes` option

@@ -1,4 +1,4 @@
-// Home.vue
+<!-- // Home.vue -->
 
 <template>
     <h1>Welcome to home</h1>

@@ -37,7 +37,7 @@ urlpatterns = [
     path('api/User/email/<slug:username>', views.update_user_email, name = "user"),
     path('api/User/dob/<slug:username>', views.update_user_DOB, name = "user"),
     path('api/User/', views.user_api),
-    path('api/User/<int:user_id>/', views.user_detail),
+    path('api/User/<slug:username>', views.user_detail),
 
 
 ]

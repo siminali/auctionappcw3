@@ -11,7 +11,7 @@ from .models import User, Profile
 from .forms import LoginForm, SignupForm
 from django.views.decorators.csrf import csrf_exempt
 
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpRequest
 from django.template import loader
 from mainapp.models import User, Item, QandA
 from django.core.mail import send_mail
@@ -67,7 +67,7 @@ def login_view(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None:
                 auth.login(request, user)
-                return redirect('mainapp:messages')
+                return redirect('http://localhost:5173/')
 
             # failed authentication
             return render(request, 'error.html', {
@@ -193,7 +193,7 @@ def messages_view(request):
         'vue_data': vue_data,
     })
 
-
+# From here
 # update email
 
 @csrf_exempt
@@ -228,3 +228,28 @@ def update_user_profile_pic(request):
         user_profile.profile_pic: any = data['profile_pic']
         user_profile.save()
         return JsonResponse(user_profile.to_dict())
+
+
+
+def user_api(request: HttpRequest) -> HttpResponse:
+
+    """ GET and POST methods when spcific movie object is not invloved, general methods """
+
+    if request.method == 'GET':
+        return JsonResponse({
+            
+                'movies': [
+                    User.to_dict()
+                    for user in User.objects.all()
+                ]
+             
+         })
+
+def user_detail(request: HttpRequest, user_id: int) -> HttpResponse:
+    """ Methods for different request types relating to a specific movie object 
+    identified through id  """
+
+    user = get_object_or_404(User, id=user_id)
+
+    if (request.method == 'GET'):
+        return JsonResponse(user.to_dict())

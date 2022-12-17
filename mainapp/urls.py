@@ -32,9 +32,12 @@ urlpatterns = [
 
 
     #path('api/show', views.show_items),
-    path('api/User/<slug:username>', views.update_user_detail, name = "user"),
+    
 
-     path('api/User/<slug:username>', views.get_user_deets, name = "user"),
+    path('api/User/email/<slug:username>', views.update_user_email, name = "user"),
+    path('api/User/dob/<slug:username>', views.update_user_DOB, name = "user"),
+    path('api/User/', views.user_api),
+    path('api/User/<int:user_id>/', views.user_detail),
 
 
 ]
